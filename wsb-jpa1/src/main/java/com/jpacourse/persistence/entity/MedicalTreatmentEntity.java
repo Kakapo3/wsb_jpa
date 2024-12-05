@@ -15,38 +15,38 @@ import javax.persistence.Table;
 @Table(name = "MEDICAL_TREATMENT")
 public class MedicalTreatmentEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(nullable = false)
-	private String description;
+    @Column(nullable = false)
+    private String description;
 
-	@Enumerated(EnumType.STRING)
-	private TreatmentType type;
+    @Enumerated(EnumType.STRING)
+    private TreatmentType type;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public TreatmentType getType() {
-		return type;
-	}
+    public TreatmentType getType() {
+        return type;
+    }
 
-	public void setType(TreatmentType type) {
-		this.type = type;
-	}
+    public void setType(TreatmentType type) {
+        this.type = type;
+    }
 
 }
