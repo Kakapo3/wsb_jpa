@@ -33,9 +33,7 @@ public class VisitEntity {
     @JsonBackReference // zapobieganie zapętleniu się podczas serializacji do JSONa
     private PatientEntity patient;
 
-    @Nullable // wizyta nie musi mieć przypisanych zabiegów, gdy sie np okaże że pacjent jest zdrowy
-    @OneToMany
-    @JoinColumn(name = "medical_treatments")
+    @OneToMany(mappedBy = "visit", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MedicalTreatmentEntity> medicalTreatments;
 
     @Nullable
