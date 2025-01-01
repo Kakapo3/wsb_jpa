@@ -39,6 +39,8 @@ public class PatientEntity {
     // relcja dwustronna, zarządzanie odbywa się po stronie VisitEntity
     private List<VisitEntity> visits = new ArrayList<>();
 
+    private Long annualIncome;
+
     public void addVisit(VisitEntity visit) {
         visits.add(visit);
         visit.setPatient(this);
@@ -105,4 +107,27 @@ public class PatientEntity {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public AddressEntity getAddress() {
+        return address;
+    }
+
+    public List<VisitEntity> getVisits() {
+        return visits;
+    }
+
+    public void setAddress(AddressEntity address) {
+        this.address = address;
+    }
+
+    public void setVisits(List<VisitEntity> visits) {
+        this.visits = visits;
+    }
+
+    public Long getAnnualIncome() {
+        return annualIncome;
+    }
+
+    public void setAnnualIncome(Long annualIncome) {
+        this.annualIncome = annualIncome;
+    }
 }
