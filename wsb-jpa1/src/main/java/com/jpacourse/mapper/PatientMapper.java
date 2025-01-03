@@ -10,6 +10,7 @@ public final class PatientMapper {
     private PatientMapper() {}
 
     public static PatientTO mapToTO(final PatientEntity patientEntity) {
+        VisitMapper visitMapper = new VisitMapper();
         if (patientEntity == null) return null;
         final PatientTO patientTO = new PatientTO();
         patientTO.setId(patientEntity.getId());
@@ -20,12 +21,13 @@ public final class PatientMapper {
         patientTO.setPatientNumber(patientEntity.getPatientNumber());
         patientTO.setDateOfBirth(patientEntity.getDateOfBirth());
         patientTO.setAddress(AddressMapper.mapToTO(patientEntity.getAddress()));
-        patientTO.setVisits(patientEntity.getVisits().stream().map(VisitMapper::mapToTO).collect(Collectors.toList()));
+        patientTO.setVisits(patientEntity.getVisits().stream().map(visitMapper::mapToTO).collect(Collectors.toList()));
         patientTO.setAnnualIncome(patientEntity.getAnnualIncome());
         return patientTO;
     }
 
     public static PatientEntity mapToEntity(final PatientTO patientTO) {
+        VisitMapper visitMapper = new VisitMapper();
         if (patientTO == null) return null;
         final PatientEntity patientEntity = new PatientEntity();
         patientEntity.setFirstName(patientTO.getFirstName());
@@ -35,7 +37,7 @@ public final class PatientMapper {
         patientEntity.setPatientNumber(patientTO.getPatientNumber());
         patientEntity.setDateOfBirth(patientTO.getDateOfBirth());
         patientEntity.setAddress(AddressMapper.mapToEntity(patientTO.getAddress()));
-        patientEntity.setVisits(patientTO.getVisits().stream().map(VisitMapper::mapToEntity).collect(Collectors.toList()));
+        patientEntity.setVisits(patientTO.getVisits().stream().map(visitMapper::mapToEntity).collect(Collectors.toList()));
         patientEntity.setAnnualIncome(patientTO.getAnnualIncome());
         return patientEntity;
     }

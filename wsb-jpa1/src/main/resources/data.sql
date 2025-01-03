@@ -12,13 +12,13 @@ insert into address (id, address_line1, address_line2, city, postal_code)
 -- DOCTOR --
 
 insert into doctor (id, first_name, last_name, telephone_number, email, doctor_number, specialization, address)
-            values (1, 'Jan', 'Kowalski', '123456789', 'jan.kowalski@gmail.com', '123', 'Okulista', 1);
+            values (1, 'Jan', 'Kowalski', '123456789', 'jan.kowalski@gmail.com', '123', 'OCULIST', 1);
 
 insert into doctor (id, first_name, last_name, telephone_number, email, doctor_number, specialization, address)
-            values (2, 'Anna', 'Nowak', '111222333', 'anna.nowak@o2.com', '125', 'Laryngolog', 1);
+            values (2, 'Anna', 'Nowak', '111222333', 'anna.nowak@o2.com', '125', 'SURGEON', 1);
 
 insert into doctor (id, first_name, last_name, telephone_number, email, doctor_number, specialization, address)
-            values (3, 'Adam', 'Mlynarz', '123123123', 'adam.mlynarz@gmail.com', '134', 'Dentysta', 3);
+            values (3, 'Adam', 'Mlynarz', '123123123', 'adam.mlynarz@gmail.com', '134', 'DERMATOLOGIST', 3);
 
 
 -- PATIENT --

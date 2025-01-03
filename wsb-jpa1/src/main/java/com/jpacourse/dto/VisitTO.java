@@ -14,5 +14,7 @@ public class VisitTO {
     private LocalDateTime time;
     private String doctorFirstName;
     private String doctorLastName;
+    private Long doctorId;
+    private Long patientId;
     private List<TreatmentType> treatmentTypes;
 }
