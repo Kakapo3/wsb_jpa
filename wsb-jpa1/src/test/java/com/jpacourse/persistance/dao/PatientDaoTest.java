@@ -44,10 +44,6 @@ public class PatientDaoTest
         // when
         PatientEntity patientEntity = patientDao.findOne(1L);
         DoctorEntity doctorEntity = doctorDao.findOne(1L);
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        System.out.println(patientEntity.getFirstName() + " " + patientEntity.getLastName());
-        System.out.println(doctorEntity.getFirstName());
-        System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
         patientDao.createVisit(patientEntity.getId(), doctorEntity.getId(), now.plusYears(1), "Some description");
         // then
         assertThat(visitDao.findAll().size()).isEqualTo(initialSize + 1);
