@@ -2,6 +2,7 @@ package com.jpacourse.persistance.dao;
 
 import com.jpacourse.dto.DoctorTO;
 import com.jpacourse.dto.PatientTO;
+import com.jpacourse.dto.VisitTO;
 import com.jpacourse.persistence.dao.AddressDao;
 import com.jpacourse.persistence.entity.AddressEntity;
 import com.jpacourse.persistence.entity.PatientEntity;
@@ -32,15 +33,24 @@ public class PatientServiceTest
 
     @Transactional
     @Test
-    public void testDeletingPatient() {
+    public void testDeletingPatientShouldDeleteVisitNotDoctor() {
         // given
-        // when
         PatientTO patientTO = patientService.findById(2L);
         assertThat(patientTO).isNotNull();
+        VisitTO visitTO = visitService.findById(3L);
+        assertThat(visitTO).isNotNull();
+        DoctorTO doctorTO = doctorService.findById(1L);
+        assertThat(doctorTO).isNotNull();
+        // when
+
         patientService.deleteById(patientTO.getId());
         // then
         PatientTO newPatientTO = patientService.findById(patientTO.getId());
         assertThat(newPatientTO).isNull();
+        visitTO = visitService.findById(3L);
+        assertThat(visitTO).isNull();
+        doctorTO = doctorService.findById(1L);
+        assertThat(doctorTO).isNotNull();
     }
 
     @Transactional
