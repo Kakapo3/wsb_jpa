@@ -1,6 +1,8 @@
 package com.jpacourse.persistence.dao.impl;
 
+import com.jpacourse.dto.PatientTO;
 import com.jpacourse.dto.VisitTO;
+import com.jpacourse.mapper.PatientMapper;
 import com.jpacourse.mapper.VisitMapper;
 import com.jpacourse.persistence.dao.DoctorDao;
 import com.jpacourse.persistence.dao.PatientDao;
@@ -11,7 +13,10 @@ import com.jpacourse.persistence.entity.VisitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.TypedQuery;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements PatientDao {
@@ -50,5 +55,24 @@ public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements 
         visitDao.save(ve);
 
         return visitTO;
+    }
+
+    @Override
+    public List<PatientTO> getPatientByLastName(String lastName) {
+        String jpql = "SELECT p FROM PatientEntity p WHERE p.lastName = :lastName";
+        TypedQuery<PatientEntity> query = entityManager.createQuery(jpql, PatientEntity.class);
+        query.setParameter("lastName", lastName);
+
+        return query.getResultList().stream().map(PatientMapper::mapToTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<VisitTO> getVisitByPatientId(Long patientId) {
+        String jpql = "SELECT v FROM VisitEntity v WHERE v.patient.id = :patientId";
+        TypedQuery<VisitEntity> query = entityManager.createQuery(jpql, VisitEntity.class);
+        query.setParameter("patientId", patientId);
+
+        VisitMapper vm = new VisitMapper();
+        return query.getResultList().stream().map(vm::mapToTO).collect(Collectors.toList());
     }
 }

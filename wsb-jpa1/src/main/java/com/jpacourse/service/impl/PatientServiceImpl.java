@@ -1,6 +1,7 @@
 package com.jpacourse.service.impl;
 
 import com.jpacourse.dto.PatientTO;
+import com.jpacourse.dto.VisitTO;
 import com.jpacourse.mapper.PatientMapper;
 import com.jpacourse.persistence.dao.PatientDao;
 import com.jpacourse.persistence.entity.PatientEntity;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -37,5 +39,13 @@ public class PatientServiceImpl implements PatientService {
         patientDao.deleteAll();
     }
 
+    @Override
+    public List<PatientTO> findByLastName(String lastName) {
+        return patientDao.getPatientByLastName(lastName);
+    }
 
+    @Override
+    public List<VisitTO> findVisitByPatientId(Long patientId) {
+        return patientDao.getVisitByPatientId(patientId);
+    }
 }
