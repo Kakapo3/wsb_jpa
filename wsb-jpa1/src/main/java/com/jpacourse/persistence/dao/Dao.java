@@ -7,6 +7,8 @@ public interface Dao<T, K extends Serializable> {
 
     T save(T entity);
 
+    void mergeAndFlush(T entity);
+
     T getOne(K id);
 
     T findOne(K id);

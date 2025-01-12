@@ -1,10 +1,7 @@
 package com.jpacourse.persistence.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "ADDRESS")
@@ -21,6 +18,9 @@ public class AddressEntity {
     private String addressLine2;
 
     private String postalCode;
+
+    @Version
+    private Timestamp version;
 
     public Long getId() {
         return id;
@@ -62,4 +62,11 @@ public class AddressEntity {
         this.postalCode = postalCode;
     }
 
+    public Timestamp getVersion() {
+        return version;
+    }
+
+    public void setVersion(Timestamp version) {
+        this.version = version;
+    }
 }

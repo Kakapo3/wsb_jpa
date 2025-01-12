@@ -23,11 +23,17 @@ insert into doctor (id, first_name, last_name, telephone_number, email, doctor_n
 
 -- PATIENT --
 
-insert into patient (id, date_of_birth, email, first_name, last_name, patient_number, telephone_number, address)
-            values (1, '1995-01-01', 'bartosz.nowak@gmail.com', 'Bartosz', 'Nowak', '111', '123654789', 2);
+insert into patient (id, date_of_birth, email, first_name, last_name, patient_number, telephone_number, address, annual_income)
+            values (1, '1995-01-01', 'bartosz.nowak@gmail.com', 'Bartosz', 'Nowak', '111', '123654789', 2, 100000);
 
-insert into patient (id, date_of_birth, email, first_name, last_name, patient_number, telephone_number, address)
-            values (2, '1992-08-21', 'jp2@gmail.com', 'Karol', 'Wojtyla', '133', '132465798', 3);
+insert into patient (id, date_of_birth, email, first_name, last_name, patient_number, telephone_number, address, annual_income)
+            values (2, '1992-08-21', 'jp2@gmail.com', 'Karol', 'Wojtyla', '133', '132465798', 3, 200000);
+
+insert into patient (id, date_of_birth, email, first_name, last_name, patient_number, telephone_number, address, annual_income)
+            values (3, '1992-08-21', 'makrp@gmail.com', 'Maciej', 'Karp', '133', '132465798', 3, 200000);
+
+insert into patient (id, date_of_birth, email, first_name, last_name, patient_number, telephone_number, address, annual_income)
+            values (4, '1992-08-21', 'wieczniemlody@gmail.com', 'Krzysiu', 'Ibisz', '133', '132465798', 3, 150000);
 
 -- VISIT --
 

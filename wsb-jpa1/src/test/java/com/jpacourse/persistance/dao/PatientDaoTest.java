@@ -61,4 +61,22 @@ public class PatientDaoTest
         assertThat(patientTOlist.size()).isEqualTo(1);
     }
 
+    @Transactional
+    @Test
+    public void testShouldFindPatientsWithOverNumVisits() {
+        List<PatientTO> patientTOList = patientDao.getPatientsByNumOfVisitsGreaterThan(2L);
+        assertThat(patientTOList).isNotNull();
+        assertThat(patientTOList.size()).isEqualTo(1);
+        assertThat(patientTOList.get(0).getEmail()).isEqualTo("bartosz.nowak@gmail.com");
+    }
+
+    @Transactional
+    @Test
+    public void testShouldFindPatientsWithAnnualIncomeLesserThanNum() {
+        List<PatientTO> patientTOList = patientDao.getPatientsByAnnualIncomeLesserThan(120000L);
+        assertThat(patientTOList).isNotNull();
+        assertThat(patientTOList.size()).isEqualTo(1);
+        assertThat(patientTOList.get(0).getEmail()).isEqualTo("bartosz.nowak@gmail.com");
+    }
+
 }

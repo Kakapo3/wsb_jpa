@@ -17,7 +17,7 @@ public class PatientTO implements Serializable {
     private String email;
     private String patientNumber;
     private LocalDate dateOfBirth;
+    private Long annualIncome;
     private AddressTO address;
     private List<VisitTO> visits = new ArrayList<>();
-    private Long annualIncome;
 }

@@ -31,6 +31,8 @@ public class PatientEntity {
     @Column(nullable = false)
     private LocalDate dateOfBirth;
 
+    private Long annualIncome;
+
     @OneToOne
     @JoinColumn(name = "address", nullable = false) // pacjent musi mieć przypisany adres
     private AddressEntity address;
@@ -38,8 +40,6 @@ public class PatientEntity {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     // relcja dwustronna, zarządzanie odbywa się po stronie VisitEntity
     private List<VisitEntity> visits = new ArrayList<>();
-
-    private Long annualIncome;
 
     public void addVisit(VisitEntity visit) {
         visits.add(visit);

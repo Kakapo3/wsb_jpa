@@ -75,4 +75,22 @@ public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements 
         VisitMapper vm = new VisitMapper();
         return query.getResultList().stream().map(vm::mapToTO).collect(Collectors.toList());
     }
+
+    @Override
+    public List<PatientTO> getPatientsByNumOfVisitsGreaterThan(Long numOfVisits) {
+        String jpql = "SELECT p FROM PatientEntity p LEFT JOIN  p.visits v GROUP BY p HAVING count(v) >= :numOfVisits";
+        TypedQuery<PatientEntity> query = entityManager.createQuery(jpql, PatientEntity.class);
+        query.setParameter("numOfVisits", numOfVisits);
+
+        return query.getResultList().stream().map(PatientMapper::mapToTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PatientTO> getPatientsByAnnualIncomeLesserThan(Long value) {
+        String jpql = "SELECT p FROM PatientEntity p WHERE p.annualIncome < :value";
+        TypedQuery<PatientEntity> query = entityManager.createQuery(jpql, PatientEntity.class);
+        query.setParameter("value", value);
+        return query.getResultList().stream().map(PatientMapper::mapToTO).collect(Collectors.toList());
+    }
+
 }

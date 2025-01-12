@@ -15,4 +15,8 @@ public interface PatientDao extends Dao<PatientEntity, Long> {
 
     List<VisitTO> getVisitByPatientId(Long patientId);
 
+    List<PatientTO> getPatientsByNumOfVisitsGreaterThan(Long numOfVisits);
+
+    List<PatientTO> getPatientsByAnnualIncomeLesserThan(Long value);
+
 }

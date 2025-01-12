@@ -6,15 +6,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertThrows;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AddressDaoTest
-{
+public class AddressDaoTest {
     @Autowired
     private AddressDao addressDao;
 
@@ -45,7 +46,7 @@ public class AddressDaoTest
         // then
         assertThat(saved).isNotNull();
         assertThat(saved.getId()).isNotNull();
-        assertThat(addressDao.count()).isEqualTo(entitiesNumBefore+1);
+        assertThat(addressDao.count()).isEqualTo(entitiesNumBefore + 1);
     }
 
     @Transactional
@@ -71,5 +72,24 @@ public class AddressDaoTest
         assertThat(removed).isNull();
     }
 
+    @Test
+    public void testOptimisticLocking() {
+        AddressEntity addressEntity = new AddressEntity();
+        addressEntity.setAddressLine1("line1");
+        addressEntity.setAddressLine2("line2");
+        addressEntity.setCity("City1");
+        addressEntity.setPostalCode("66-666");
+
+        AddressEntity savedAddress = addressDao.save(addressEntity);
+
+        AddressEntity addressSession1 = addressDao.findOne(savedAddress.getId());
+        AddressEntity addressSession2 = addressDao.findOne(savedAddress.getId());
+
+        addressSession1.setAddressLine1("changed address line1");
+        addressDao.mergeAndFlush(addressSession1);
+
+        addressSession2.setAddressLine1("changed address AGAIN");
+        assertThrows(ObjectOptimisticLockingFailureException.class, () -> addressDao.mergeAndFlush(addressSession2));
+    }
 
 }
